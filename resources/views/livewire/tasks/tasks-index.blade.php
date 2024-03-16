@@ -19,7 +19,7 @@
         <form wire:submit="save">
           <div class="mb-3">
             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-            <input wire:model="title" type="text"
+            <input wire:model="form.title" type="text"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               id="title">
             <div>
@@ -32,7 +32,7 @@
 
           <div class="mb-3">
             <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug</label>
-            <input wire:model="slug" type="text"
+            <input wire:model="form.slug" type="text"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               id="slug">
             <div>
@@ -46,7 +46,7 @@
           <div class="mb-3">
             <label for="description"
               class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-            <textarea wire:model="description" type="text"
+            <textarea wire:model="form.description" type="text"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               id="description"></textarea>
             <div>
@@ -60,7 +60,7 @@
           <div class="flex justify-between">
             <div class="mb-3">
               <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
-              <select id="status" wire:model="status"
+              <select id="status" wire:model="form.status"
                 class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 @foreach (\App\Enums\StatusType::cases() as $status)
                 <option value="{{ $status->value }}">{{ $status->name }}</option>
@@ -77,7 +77,7 @@
             <div class="mb-3">
               <label for="priority"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
-              <select id="priority" wire:model="priority"
+              <select id="priority" wire:model="form.priority"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 @foreach (\App\Enums\PriorityType::cases() as $priority)
                 <option value="{{ $priority->value }}">{{ $priority->name }}</option>
@@ -94,7 +94,7 @@
 
           <div class="mb-3">
             <label for="slug" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Deadline</label>
-            <input wire:model="deadline" type="date"
+            <input wire:model="form.deadline" type="date"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <div>
               @error('form.deadline')
