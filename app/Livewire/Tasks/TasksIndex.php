@@ -20,6 +20,8 @@ class TasksIndex extends Component
 
   public function render()
   {
-    return view('livewire.tasks.tasks-index')->layout('layouts.app');
+    return view('livewire.tasks.tasks-index', [
+      'tasks' => auth()->user()->tasks,
+    ])->layout('layouts.app');
   }
 }

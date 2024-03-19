@@ -1,9 +1,27 @@
 <div class="max-w-7xl mx-auto flex">
+
+  <div class="w-7/12 mx-4">
+    @foreach ($tasks as $task)
+      <a href="#" class="flex flex-col my-4 px-4 py-6 items-center bg-white border border-gray-200 md:flex-row rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="flex flex-col justify-between p-4 leading-normal">
+          <div class="flex justify-between mb-4">
+              <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {{ $task->title }}
+              </h5>
+              <span
+                  class="px-2 py-1 border border-slate-200 rounded-md">{{ $task->deadline->diffForHumans() }}</span>
+          </div>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $task->description }}</p>
+      </div>
+      </a>
+    @endforeach
+  </div>
+
   <div class="w-4/12 bg-slate-200 rounded-md mt-2">
     <div class="mt-6 px-6">
       <div>
-        <h1 class="text-2xl text-center font-semibold">Welcome, <span class="text-indigo-500">{{ Auth::user()->name
-            }}</span></h1>
+        <h1 class="text-2xl text-center font-semibold">Welcome, <span class="text-indigo-500">{{
+            Auth::user()->name}}</span></h1>
         <p class="text-sm text-center">This is your personal tasks manager</p>
       </div>
 
@@ -19,7 +37,7 @@
         <form wire:submit="save">
           <div class="mb-3">
             <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
-            <input wire:model="form.title" type="text"
+            <input wire:model.live="form.title" type="text"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               id="title">
             <div>
@@ -103,7 +121,7 @@
             </div>
           </div>
 
-          
+
           <div class="mb-3 flex justify-between">
             <button type="submit" class="flex py-2 px-4 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md">Submit
               <div wire:loading>
