@@ -1,22 +1,32 @@
-<div class="w-7/12 mx-4">
-  <livewire:tasks.tasks-count :count="$count" />
+<div class="mx-4 w-7/12">
+  <livewire:tasks.tasks-count :$tasksByStatus />
   <div class="px-6">
     @foreach ($tasks as $task)
-    <a href="#"
-      class="flex flex-col my-4 px-4 py-6 items-center bg-white border border-gray-200 md:flex-row rounded-lg shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-      <div class="flex flex-col justify-between p-4 leading-normal">
-        <div class="flex justify-between mb-4">
-          <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {{ $task->title }}
-          </h5>
-          <span class="px-2 py-1 border border-slate-200 rounded-md">{{ $task->deadline->diffForHumans() }}</span>
+      <div
+        class="my-4 rounded-lg bg-white px-4 py-6 shadow hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+        <div class="p-4 leading-normal">
+          <div class="mb-4 flex justify-between">
+            <h5 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+              {{ $task->title }}
+            </h5>
+            <span class="rounded-md border border-slate-200 px-2 py-1">{{ $task->deadline->diffForHumans() }}</span>
+          </div>
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $task->description }}</p>
         </div>
-        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ $task->description }}</p>
+
+        @foreach (App\enums\StatusType::cases() as $case)
+          <button type="button" wire:click="changeStatus({{ $task->id }}, '{{ $case->value }}')"
+            @class([
+                'inline-flex items-center px-4 py-2 bg-white border rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150',
+                $case->color() => true,
+            ]) {{ $case->value == $task->status->value ? 'disabled' : '' }}>
+            {{ Str::of($case->value)->headline() }}
+          </button>
+        @endforeach
       </div>
-    </a>
     @endforeach
   </div>
-  <div class="mt-2 mb-12 p-2">
+  <div class="mb-12 mt-2 p-2">
     {{ $tasks->links() }}
   </div>
 </div>
