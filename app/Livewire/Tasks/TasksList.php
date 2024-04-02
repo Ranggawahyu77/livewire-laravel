@@ -24,6 +24,12 @@ class TasksList extends Component
     $task->update(['status' => $status]);
   }
 
+  public function delete(Task $task)
+  {
+    $task->delete();
+    unset($this->tasksByStatus);
+  }
+
   #[Computed()]
   public function tasks()
   {
@@ -33,7 +39,7 @@ class TasksList extends Component
   #[Computed(persist: true)]
   public function tasksByStatus()
   {
-    return auth()->user()->tasks()->select('status', DB::raw('count(*) as count'))
+    return auth()->user()->tasks()->select('status', DB::raw('COUNT(*) as count'))
       ->groupBy('status')
       ->orderBy('status', 'desc')
       ->get();

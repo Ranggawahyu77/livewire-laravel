@@ -5,7 +5,7 @@ namespace App\Enums;
 enum StatusType: string
 {
   case STARTED = 'started';
-  case IN_PROGRES = 'in_progress';
+  case IN_PROGRESS = 'in_progress';
   case DONE = 'done';
 
 
@@ -13,8 +13,9 @@ enum StatusType: string
   {
     return match ($this) {
       self::STARTED => 'border-blue-500',
-      self::IN_PROGRES => 'border-yellow-500',
+      self::IN_PROGRESS => 'border-yellow-500',
       self::DONE => 'border-green-500',
+      default => 'border-gray-500',
     };
   }
 }

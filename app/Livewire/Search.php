@@ -7,8 +7,9 @@ use Livewire\Component;
 
 class Search extends Component
 {
-  #[Url(as: 'q', keep: true)]
-  public $search;
+  #[Url]
+  public $search = '';
+
   public function render()
   {
     $results = [];
