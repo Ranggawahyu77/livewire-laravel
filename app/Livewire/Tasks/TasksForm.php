@@ -25,6 +25,11 @@ class TasksForm extends Component
     $this->form->setTask($task);
   }
 
+  public function refresh()
+  {
+    $this->form->reset();
+  }
+
   public function render()
   {
     return view('livewire.tasks.tasks-form');

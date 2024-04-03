@@ -1,6 +1,8 @@
 <div class="mx-4 w-7/12">
-  <livewire:tasks.tasks-count :tasksByStatus="$this->tasksByStatus" />
-  @if (true)
+  @if ($this->tasksByStatus->count() > 0)
+    <livewire:tasks.tasks-count :tasksByStatus="$this->tasksByStatus" />
+  @endif
+  @if ($this->tasks->count() > 0)
     <div class="px-6">
       @foreach ($this->tasks as $task)
         <div
@@ -38,8 +40,12 @@
         </div>
       @endforeach
     </div>
+    <div class="mb-12 mt-2 p-2">
+      {{ $this->tasks->links() }}
+    </div>
+  @else
+    <div class="mb-12 mt-2 p-2">
+      <h1 class="text-center text-2xl font-semibold text-indigo-500">No Tasks</h1>
+    </div>
   @endif
-  <div class="mb-12 mt-2 p-2">
-    {{ $this->tasks->links() }}
-  </div>
 </div>
